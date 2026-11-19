@@ -1,6 +1,6 @@
 # 来源与改动说明
 
-本技能改自 [cat-xierluo/legal-skills](https://github.com/cat-xierluo/legal-skills) 的 `skills/local-asr`（MIT 许可，原文见 `LICENSE.txt`，未改动），本版沿用 `funasr-transcribe` 这一名称。
+本技能改自杨卫薪律师及贡献者的 [cat-xierluo/legal-skills](https://github.com/cat-xierluo/legal-skills) 中的 `skills/local-asr`（MIT 许可，原文见 `LICENSE.txt`，未改动），本版沿用 `funasr-transcribe` 这一名称。感谢原作者的开放分享。
 
 本版改动要点：
 

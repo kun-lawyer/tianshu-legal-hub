@@ -142,12 +142,20 @@ SKILL.md                 天枢中台本身作为一个 skill：教 Agent 安装
 
 提交代码前跑 `python 工具/敏感词扫描.py <词表>`，词表放仓库外。
 
-## 致谢
-
-- 规则引擎：[agent-autoloop](https://github.com/KKKKhazix/agent-autoloop)（MIT），安装时下载，不随仓库分发。
-- court-sms、mineru-ocr、funasr-transcribe 改自 [cat-xierluo/legal-skills](https://github.com/cat-xierluo/legal-skills)（MIT）。
-- contract-review 的部分文件来自 [duhu2000/legal-assistant-skills](https://github.com/duhu2000/legal-assistant-skills)（Apache-2.0）。
-
 ## 许可
 
 本仓库自有部分为 [MIT](LICENSE)。`skills/` 下来自第三方的文件继续适用其原许可，见各目录的 `LICENSE*` 与 `NOTICE.md`。
+
+## 致谢
+
+天枢中台建立在开源社区已有成果之上。特别感谢**卡兹克**与**杨卫薪律师**开放分享自己的工具和实践，使本项目能够在此基础上做面向律师日常工作的整合与适配。
+
+| 作者或团队 | 项目 | 本项目使用或参考的内容 |
+|---|---|---|
+| **卡兹克（数字生命卡兹克 / KKKKhazix）**及贡献者 | [agent-autoloop](https://github.com/KKKKhazix/agent-autoloop) | 中台使用的规则引擎，负责事件触发、任务调度和人工确认。按 MIT 许可使用，安装时从上游获取。 |
+| **杨卫薪律师（cat-xierluo）**及贡献者 | [legal-skills](https://github.com/cat-xierluo/legal-skills) | 法院短信 `court-sms`、扫描件识别 `legal-ocr`、本地语音识别 `local-asr` 是本仓库对应三个技能的上游来源；本项目做了 Windows、本地服务和中台流程适配。所引用的三个技能保留各自 MIT 许可及改动说明。 |
+| **JiCheng、zh-xx、duhu2000**及相关贡献者 | [legal-assistant-skills 原项目](https://github.com/zh-xx/legal-assistant-skills)、[企查查 MCP 集成分支](https://github.com/duhu2000/legal-assistant-skills) | 合同审查技能的部分脚本与参考文档。沿用 Apache-2.0 许可，来源、文件范围和本地改动见 [NOTICE](skills/contract-review/NOTICE.md)。 |
+| **法穿团队（Lawyer-ray）** | [FachuanHybridSystem](https://github.com/Lawyer-ray/FachuanHybridSystem) | 法院短信技能所参考的短信解析、案件匹配及文书下载流程。具体参考范围与实现差异见[归属声明](skills/court-sms/references/ATTRIBUTION.md)，该项目不纳入本仓库的 MIT 授权范围。 |
+| **MinerU、FunASR 开源团队**及贡献者 | [MinerU](https://github.com/opendatalab/MinerU)、[FunASR](https://github.com/modelscope/FunASR) | 提供文档解析和语音识别能力；程序与模型按需安装，不随本仓库分发，分别遵循上游许可。 |
+
+感谢所有上游作者、维护者和贡献者。使用或再分发本项目时，请一并保留相关版权声明、许可证和来源说明。

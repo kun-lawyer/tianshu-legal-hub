@@ -1,6 +1,6 @@
 # 来源与改动说明
 
-本技能改自 [cat-xierluo/legal-skills](https://github.com/cat-xierluo/legal-skills) 的 `skills/court-sms`（MIT 许可，原文见 `LICENSE.txt`，未改动）。上游对 FachuanHybridSystem 的参考与致谢见 `references/ATTRIBUTION.md`。
+本技能改自杨卫薪律师及贡献者的 [cat-xierluo/legal-skills](https://github.com/cat-xierluo/legal-skills) 中的 `skills/court-sms`（MIT 许可，原文见 `LICENSE.txt`，未改动）。感谢原作者的开放分享。上游对 FachuanHybridSystem 的参考与致谢见 `references/ATTRIBUTION.md`。
 
 本版改动要点：
 
