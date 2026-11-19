@@ -1,0 +1,85 @@
+{
+  "_说明": "复制为 config.json 后填写。config.json 已在 .gitignore 里，不会被提交。路径可用 ~ 和 %APPDATA% 这类环境变量；留空的路径表示不用该功能。",
+  "本人": "张三",
+  "同事": ["李四", "王五"],
+  "_地名停用词": "按案件名找案件时忽略的地名，写本地常见的市、省名。以市、省、县、区结尾的会同时忽略不带该字的写法。",
+  "地名停用词": ["某某市", "某某省"],
+  "时区": 8,
+
+  "_资料根目录": "面板允许打开文件的根目录，也是微信材料收取找案件文件夹的范围。",
+  "资料根目录": ["D:/资料"],
+  "目录": {
+    "本人目录": "D:/资料/团队成员/张三",
+    "单次案件": "D:/资料/团队成员/张三/单次案件",
+    "顾问单位": "D:/资料/顾问单位",
+    "_事务目录": "非案件的事务性工作目录（律协、社会活动等），找案件目录时单独归为事务类。",
+    "事务目录": ["D:/资料/团队成员/张三/社会活动"],
+    "_额外扫描目录": "遗留事项扫描工作记录时，除本仓库和资料根目录外再看的目录。",
+    "额外扫描目录": ["D:/诉讼案件"],
+    "传票扫描": "D:/资料/扫描文件/传票扫描",
+    "_送审收件清单": "顾问单位送审收件的清单文件，由 guwen-review 的 wechat_inbox.py 维护。",
+    "送审收件清单": "D:/资料/顾问单位/_微信收件/收件清单.json",
+    "知识库待处理": ""
+  },
+  "_不盘点目录": "顾问单位目录下不参与在办盘点和周研判的子目录名。",
+  "不盘点目录": [],
+
+  "顾问单位": {
+    "启用": false,
+    "_说明": "顾问单位参数与送审收件规则，格式见 示例/units.example.json、示例/inbox.example.json。",
+    "units": "./示例/units.example.json",
+    "inbox": "./示例/inbox.example.json",
+    "收件脚本": "~/.claude/skills/guwen-review/scripts/wechat_inbox.py",
+    "送审收件起始日": "2026-01-01"
+  },
+
+  "台账": {
+    "_说明": "案件管理后端（台账接口）。账号写在 凭据目录/credentials.json：{\"base\": \"https://...\", \"username\": \"...\", \"password\": \"...\"}",
+    "凭据目录": "~/.tianshu-ledger",
+    "操作人后缀": "（天枢中台）",
+    "_案件编号前缀": "新建案件自动编号为 前缀-年份-序号。",
+    "案件编号前缀": "AJ"
+  },
+
+  "中台": {
+    "配置文件": "~/.agent-autoloop/config.json",
+    "数据库": "~/.agent-autoloop/hub.db"
+  },
+
+  "面板": {
+    "端口": 3351,
+    "_经度": "面板星钟按本地经度算真太阳时，东经写正数。",
+    "经度": 120
+  },
+
+  "工具": {
+    "node": "node",
+    "lark_cli": "%APPDATA%/npm/node_modules/@larksuite/cli/scripts/run.js",
+    "pwsh": "pwsh",
+    "_说明": "相对路径按仓库根目录算；skills/ 下的是随仓库提供的 skill。",
+    "mineru_convert": "./skills/mineru-ocr/scripts/convert.py",
+    "funasr": "http://127.0.0.1:8765",
+    "funasr_server": "./skills/funasr-transcribe/scripts/server.py",
+    "_funasr_python": "运行语音服务的 Python：安装向导把 FunASR 装在独立环境里，避免与主环境依赖冲突。",
+    "funasr_python": "~/.funasr-local/venv/Scripts/python.exe",
+    "知识库刷新脚本": "",
+    "中文字体": "C:/Windows/Fonts/msyh.ttc",
+    "中文粗体": "C:/Windows/Fonts/msyhbd.ttc"
+  },
+
+  "飞书": {
+    "启用": false,
+    "_说明": "本人 open_id 用 lark-cli 查得，只接收、回复本人的私聊。",
+    "本人open_id": ""
+  },
+
+  "微信": {
+    "启用": false,
+    "_说明": "只读本人电脑上本人账号的微信 4.x 数据库。密钥由 WeChatDataAnalysis 导出，本仓库不提供取密钥的代码。",
+    "密钥文件": "%APPDATA%/wechat-data-analysis-desktop/output/account_keys.json",
+    "_silk转写脚本": "微信语音转文字用的 silk 解码脚本（wechat-archive skill 的 scripts/transcribe_silk.py，不随仓库提供）；留空则不转语音。",
+    "silk转写脚本": "",
+    "_工作群关键词": "群名含这些词才当工作群处理，单位简称会自动加入。",
+    "工作群关键词": ["律所", "项目组"]
+  }
+}

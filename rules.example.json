@@ -1,0 +1,415 @@
+{
+  "timezone": "Asia/Shanghai",
+  "askFirst": [
+    "对外发消息",
+    "向法院或当事人提交材料",
+    "删数据",
+    "花钱",
+    "修改权限",
+    "新建或轮换密钥"
+  ],
+  "sources": {
+    "local": {
+      "name": "本机"
+    },
+    "inbox": {
+      "name": "微信送审收件"
+    },
+    "newcase": {
+      "name": "新案到达"
+    }
+  },
+  "agents": {
+    "assistant": {
+      "name": "Agent 助理",
+      "worker": "my-pc",
+      "use": "claude",
+      "timeout": 120
+    },
+    "brief-script": {
+      "name": "晨报脚本",
+      "worker": "my-pc",
+      "use": "command",
+      "command": [
+        "python",
+        "{cwd}/脚本/晨报.py"
+      ]
+    },
+    "evening-script": {
+      "name": "晚报脚本",
+      "worker": "my-pc",
+      "use": "command",
+      "command": [
+        "python",
+        "{cwd}/脚本/晚报.py"
+      ]
+    },
+    "summons-script": {
+      "name": "传票入库脚本",
+      "worker": "my-pc",
+      "use": "command",
+      "command": [
+        "python",
+        "{cwd}/脚本/传票入库.py"
+      ],
+      "timeout": 60
+    },
+    "prep-script": {
+      "name": "作战包派单脚本",
+      "worker": "my-pc",
+      "use": "command",
+      "command": [
+        "python",
+        "{cwd}/脚本/作战包派单.py"
+      ]
+    },
+    "inbox-script": {
+      "name": "送审收件脚本",
+      "worker": "my-pc",
+      "use": "command",
+      "command": [
+        "python",
+        "{cwd}/脚本/送审收件.py"
+      ]
+    },
+    "kb-script": {
+      "name": "知识库刷新脚本",
+      "worker": "my-pc",
+      "use": "command",
+      "command": [
+        "python",
+        "{cwd}/脚本/知识库刷新.py"
+      ],
+      "timeout": 120
+    },
+    "materials-script": {
+      "name": "微信材料收取脚本",
+      "worker": "my-pc",
+      "use": "command",
+      "command": [
+        "python",
+        "{cwd}/脚本/微信材料收取.py",
+        "auto"
+      ],
+      "timeout": 10
+    },
+    "revise-script": {
+      "name": "改稿登记脚本",
+      "worker": "my-pc",
+      "use": "command",
+      "command": [
+        "python",
+        "{cwd}/脚本/改稿回流.py",
+        "snap"
+      ],
+      "timeout": 10
+    },
+    "after-script": {
+      "name": "庭后派单脚本",
+      "worker": "my-pc",
+      "use": "command",
+      "command": [
+        "python",
+        "{cwd}/脚本/庭后派单.py"
+      ]
+    },
+    "deadline-script": {
+      "name": "期限派单脚本",
+      "worker": "my-pc",
+      "use": "command",
+      "command": [
+        "python",
+        "{cwd}/脚本/期限派单.py"
+      ]
+    },
+    "caseinfo-script": {
+      "name": "案号与名称整理脚本",
+      "worker": "my-pc",
+      "use": "command",
+      "timeout": 30,
+      "command": [
+        "python",
+        "{cwd}/脚本/案件信息.py",
+        "fill"
+      ]
+    }
+  },
+  "channels": {
+    "desktop": {
+      "name": "桌面通知"
+    },
+    "feishu": {
+      "name": "飞书",
+      "answerers": [
+        "ou_xxxxxxxx"
+      ]
+    }
+  },
+  "rules": [
+    {
+      "name": "每日晨报",
+      "when": {
+        "cron": "5 8 * * *"
+      },
+      "to": "brief-script",
+      "cwd": "D:/tianshu",
+      "group": "brief",
+      "channels": [
+        "desktop"
+      ]
+    },
+    {
+      "name": "每日晚报",
+      "when": {
+        "cron": "5 18 * * *"
+      },
+      "to": "evening-script",
+      "cwd": "D:/tianshu",
+      "group": "brief",
+      "channels": [
+        "desktop"
+      ]
+    },
+    {
+      "name": "传票入库",
+      "when": {
+        "cron": "*/20 8-22 * * *"
+      },
+      "to": "summons-script",
+      "cwd": "D:/tianshu",
+      "group": "summons"
+    },
+    {
+      "name": "作战包派单",
+      "when": {
+        "cron": "5 9,15 * * *"
+      },
+      "to": "prep-script",
+      "cwd": "D:/tianshu",
+      "group": "prep-dispatch",
+      "emits": {
+        "source": "local",
+        "types": [
+          "hearing.prep"
+        ]
+      }
+    },
+    {
+      "name": "开庭作战包",
+      "when": {
+        "source": "local",
+        "types": [
+          "hearing.prep"
+        ]
+      },
+      "to": "assistant",
+      "cwd": "D:/tianshu",
+      "prompt": "按 手册/开庭作战包.md 处理。",
+      "group": "prep",
+      "parallel": 2
+    },
+    {
+      "name": "新案成稿",
+      "when": {
+        "source": "newcase",
+        "types": [
+          "case.new"
+        ]
+      },
+      "to": "assistant",
+      "cwd": "D:/tianshu",
+      "prompt": "按 手册/新案成稿.md 处理。",
+      "group": "newcase",
+      "parallel": 1
+    },
+    {
+      "name": "微信待办",
+      "when": {
+        "cron": "30 9,12,17,21 * * *"
+      },
+      "to": "assistant",
+      "cwd": "D:/tianshu",
+      "prompt": "按 手册/微信待办.md 处理。",
+      "group": "wechat-todo"
+    },
+    {
+      "name": "飞书助理",
+      "when": {
+        "source": "local",
+        "types": [
+          "assistant.task"
+        ]
+      },
+      "to": "assistant",
+      "cwd": "D:/tianshu",
+      "prompt": "按 手册/飞书助理.md 处理。",
+      "group": "assistant",
+      "resume": true,
+      "parallel": 1
+    },
+    {
+      "name": "法院短信",
+      "when": {
+        "source": "local",
+        "types": [
+          "sms.received"
+        ]
+      },
+      "to": "assistant",
+      "cwd": "D:/tianshu",
+      "prompt": "按 手册/法院短信.md 处理。",
+      "group": "sms",
+      "emits": {
+        "source": "newcase",
+        "types": [
+          "case.new"
+        ]
+      }
+    },
+    {
+      "name": "送审收件读取",
+      "when": {
+        "cron": "*/30 8-20 * * *"
+      },
+      "to": "inbox-script",
+      "cwd": "D:/tianshu",
+      "group": "inbox",
+      "emits": {
+        "source": "inbox",
+        "types": [
+          "inbox.pending",
+          "inbox.filed"
+        ]
+      }
+    },
+    {
+      "name": "送审收件处理",
+      "when": {
+        "source": "inbox",
+        "types": [
+          "inbox.pending",
+          "inbox.filed"
+        ]
+      },
+      "to": "assistant",
+      "cwd": "D:/tianshu",
+      "prompt": "按 手册/送审收件.md 处理。",
+      "group": "inbox"
+    },
+    {
+      "name": "知识库刷新",
+      "when": {
+        "cron": "30 0 * * *"
+      },
+      "to": "kb-script",
+      "cwd": "D:/tianshu",
+      "group": "kb"
+    },
+    {
+      "name": "微信材料收取",
+      "when": {
+        "cron": "15,45 8-22 * * *"
+      },
+      "to": "materials-script",
+      "cwd": "D:/tianshu",
+      "group": "materials"
+    },
+    {
+      "name": "案件周研判",
+      "when": {
+        "cron": "0 18 * * 0"
+      },
+      "to": "assistant",
+      "cwd": "D:/tianshu",
+      "prompt": "按 手册/周研判.md 处理。",
+      "group": "review"
+    },
+    {
+      "name": "改稿登记",
+      "when": {
+        "cron": "50 8-22 * * *"
+      },
+      "to": "revise-script",
+      "cwd": "D:/tianshu",
+      "group": "revise-snap"
+    },
+    {
+      "name": "改稿回流",
+      "when": {
+        "cron": "0 17 * * 0"
+      },
+      "to": "assistant",
+      "cwd": "D:/tianshu",
+      "prompt": "按 手册/改稿回流.md 处理。",
+      "group": "revise"
+    },
+    {
+      "name": "面板出稿",
+      "when": {
+        "source": "local",
+        "types": [
+          "draft.request"
+        ]
+      },
+      "to": "assistant",
+      "cwd": "D:/tianshu",
+      "prompt": "按 手册/出稿.md 处理。",
+      "group": "draft",
+      "parallel": 2
+    },
+    {
+      "name": "庭后派单",
+      "when": {
+        "cron": "35 9 * * *"
+      },
+      "to": "after-script",
+      "cwd": "D:/tianshu",
+      "group": "after-dispatch",
+      "emits": {
+        "source": "local",
+        "types": [
+          "hearing.after"
+        ]
+      }
+    },
+    {
+      "name": "庭后跟进",
+      "when": {
+        "source": "local",
+        "types": [
+          "hearing.after"
+        ]
+      },
+      "to": "assistant",
+      "cwd": "D:/tianshu",
+      "prompt": "按 手册/庭后跟进.md 处理。",
+      "group": "after",
+      "parallel": 2
+    },
+    {
+      "name": "期限派单",
+      "when": {
+        "cron": "10 9 * * *"
+      },
+      "to": "deadline-script",
+      "cwd": "D:/tianshu",
+      "group": "deadline-dispatch",
+      "emits": {
+        "source": "local",
+        "types": [
+          "draft.request"
+        ]
+      }
+    },
+    {
+      "name": "案号与名称整理",
+      "when": {
+        "cron": "40 8,13 * * *"
+      },
+      "to": "caseinfo-script",
+      "cwd": "D:/tianshu",
+      "group": "caseinfo"
+    }
+  ],
+  "elsewhere": []
+}

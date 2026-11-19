@@ -1,0 +1,12 @@
+# Private phone profiles; distribute examples only.
+/config/lawyers.json
+/config/lawyers.json.lock
+/config/.lawyers-*.json
+
+# 本机私有配置：只分发 *.example.json
+/config/workspace.json
+/config/user-preferences.json
+
+# 运行产物：短信原文、案号、当事人等诉讼数据
+/archive/
+__pycache__/

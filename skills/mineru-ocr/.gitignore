@@ -1,0 +1,6 @@
+# 真实配置含 API Token，只分发 .env.example
+/config/.env
+
+# 运行产物：原件副本与识别结果
+/archive/
+__pycache__/

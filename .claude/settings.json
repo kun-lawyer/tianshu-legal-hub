@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(python:*)",
+      "Bash(python:*)",
+      "PowerShell(pandoc:*)",
+      "Skill",
+      "Read",
+      "Glob",
+      "Grep",
+      "Edit",
+      "Write",
+      "mcp__pkulaw-law-item",
+      "mcp__pkulaw-law-search",
+      "mcp__pkulaw-law-keyword",
+      "mcp__pkulaw-citation-check",
+      "mcp__pkulaw-case-search",
+      "mcp__pkulaw-case-list",
+      "mcp__pkulaw-case-verify",
+      "mcp__yuandian-law",
+      "mcp__yuandian-case"
+    ],
+    "additionalDirectories": []
+  }
+}

@@ -1,0 +1,20 @@
+# 核心：传票识别、案件信息、作战包排版、周研判
+PyMuPDF>=1.24.3
+python-docx
+openpyxl
+
+# 随仓库的 skill：mineru-ocr 云端识别、court-sms 合并文书 PDF、contract-review 与 gongwen-format 改 docx
+requests
+pypdf
+lxml
+defusedxml
+
+# 可选：微信模块（微信.启用）与顾问单位送审收件
+cryptography
+zstandard
+Pillow
+
+# 可选：微信点开原图（仅 Windows，模拟点击微信窗口取原图）
+opencv-python
+numpy
+pywin32

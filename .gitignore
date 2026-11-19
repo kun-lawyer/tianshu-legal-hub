@@ -1,0 +1,39 @@
+# 本机配置与凭据
+config.json
+config.json.bak-*
+config.feishu.json
+.venv/
+rules.json
+送审人.json
+微信待办排除.json
+敏感词.txt
+.claude/settings.local.json
+
+# 运行产物：含客户和案件信息，一律不提交
+日志/
+晨报/
+晚报/
+周研判/
+助理产出/
+改稿回流/
+*.xlsx
+工作记录（*）.md
+客户要求（*）.png
+
+# Python
+__pycache__/
+*.pyc
+
+# 其他
+.playwright-mcp/
+~$*
+
+# 本地密钥和调试产物
+.env
+.env.*
+!.env.example
+credentials.json
+token.json
+*.pem
+*.key
+*.log

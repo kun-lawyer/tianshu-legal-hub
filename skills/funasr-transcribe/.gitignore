@@ -1,0 +1,6 @@
+# init_env.py 按本机生成，含本机路径，不提交
+/assets/skill-env.json
+
+# 运行产物：转写稿与元数据
+/archive/
+__pycache__/
