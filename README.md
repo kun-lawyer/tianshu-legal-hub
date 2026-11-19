@@ -9,7 +9,7 @@
 
 *截图均使用虚构的演示数据，不含真实客户、案件或账号信息。*
 
-**[完整图文介绍](docs/图文概述/天枢中台概述.md)** · [安装步骤](#安装) · [外部依赖](#外部依赖) · [安全与数据](SECURITY.md)
+**[完整图文介绍](docs/图文概述/天枢中台概述.md)** · [下载完整源码](https://github.com/kun-lawyer/tianshu-legal-hub/archive/refs/heads/main.zip) · [安装步骤](#安装) · [外部依赖](#外部依赖) · [安全与数据](SECURITY.md)
 
 ## 图文导览
 
